@@ -9,10 +9,6 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '**',
-    redirectTo: 'dashboard',
-  },
-  {
     path: "dashboard",
     component: DashboardComponent
   },
@@ -29,6 +25,10 @@ const routes: Routes = [
       import("./pages/looks/looks.module").then(
         (m) => m.LooksModule
       ),
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
   },
 ];
 
