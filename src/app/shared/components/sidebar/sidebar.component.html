@@ -1,0 +1,46 @@
+<section class="sidebar d-flex">
+  <div class="sidebar__content">
+    <div class="sidebar__logo">
+      <img src="/assets/images/logo.png" alt="Logo" />
+      <h4>Closet</h4>
+    </div>
+
+    <div class="sidebar__items d-flex flex-column">
+      @for (item of menus; track item.index) {
+      <div *ngIf="item.filhos">
+        <div
+          [ngClass]="{'open': isOpenFather(item.index)}"
+          class="sidebar__childs d-flex flex-column"
+        >
+          <div 
+            class="sidebar__childs__title d-flex justify-content-between" 
+            (click)="openItemMenu(item)"
+          >
+            <span>{{ item.title }}</span>
+            <
+          </div>
+
+          @for (itemFilho of item.filhos; track itemFilho.index) {
+          <div [routerLink]="item.link + '/' + itemFilho.link">
+            <img [src]="itemFilho.icon" />
+            <span>{{ itemFilho.title }}</span>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div
+        *ngIf="!item.filhos"
+        class="sidebar__no-childs"
+        (click)="openItemMenu(item)"
+        [routerLink]="item.link"
+      >
+        <img [src]="item.icon" />
+        <span>{{ item.title }}</span>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="sidebar__open-close"><</div>
+</section>
