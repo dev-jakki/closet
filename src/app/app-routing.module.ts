@@ -7,7 +7,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-    runGuardsAndResolvers: 'always',
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
   },
   {
     path: "dashboard",
