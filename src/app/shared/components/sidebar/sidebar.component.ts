@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Menus } from '../../interfaces/menus';
+import { Sidebar } from '../../interfaces/sidebar';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,11 @@ import { Menus } from '../../interfaces/menus';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-  public itemsOpened: Array<number> = [];
+
+  public sidebar: Sidebar = {
+    opened: [],
+    expanded: true,
+  }
   
   public menus: Menus[] = [
     {
@@ -81,10 +86,10 @@ export class SidebarComponent {
     if (data.index && data.filhos) {
       let isOpen = false;
 
-      this.itemsOpened.map(itemIndex => {
+      this.sidebar.opened.map(itemIndex => {
         if (data.index === itemIndex) {
-          const result = this.itemsOpened.filter(num => num !== data.index);
-          this.itemsOpened = result;
+          const result = this.sidebar.opened.filter(num => num !== data.index);
+          this.sidebar.opened = result;
           isOpen = true;
           return;
         }
@@ -92,15 +97,26 @@ export class SidebarComponent {
 
       if (isOpen) return;
       
-      this.itemsOpened.push(data.index);
+      this.sidebar.opened.push(data.index);
     }
+  }
+
+  // Abre todos os items do sidebar
+  private expandAllItems() {
+    this.sidebar.opened = [];
+
+    this.menus.map(item => {
+      if (item.index && item.filhos) {
+        this.sidebar.opened.push(item.index);
+      }
+    });
   }
 
   // Abre e fecha itens filhos
   public isOpenFather(index: number | undefined) {
     if (index) {
-      for (let i = 0; i < this.itemsOpened.length; i++) {
-        const itemIndex = this.itemsOpened[i];
+      for (let i = 0; i < this.sidebar.opened.length; i++) {
+        const itemIndex = this.sidebar.opened[i];
         
         if (itemIndex === index) {
           return true;
@@ -111,5 +127,11 @@ export class SidebarComponent {
     }
 
     return;
+  }
+  
+  // Expande e retrai o sidebar
+  public expandRetractSidebar() {
+    this.sidebar.expanded = !this.sidebar.expanded;
+    this.expandAllItems();
   }
 }

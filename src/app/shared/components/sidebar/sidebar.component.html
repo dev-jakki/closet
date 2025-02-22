@@ -1,7 +1,13 @@
-<section class="sidebar d-flex">
+<section
+  class="sidebar d-flex"
+  [ngClass]="sidebar.expanded ? 'sidebar__width--250' : 'sidebar__width--auto'"
+>
   <div class="sidebar__content">
     <div class="sidebar__logo">
-      <img src="/assets/images/logo.png" alt="Logo" />
+      <img 
+        [ngClass]="sidebar.expanded ? 'sidebar__logo-width--30' : 'sidebar__logo-width--70'"
+        src="/assets/images/logo.png" alt="Logo" 
+      />
       <h4>Closet</h4>
     </div>
 
@@ -9,21 +15,25 @@
       @for (item of menus; track item.index) {
       <div *ngIf="item.filhos">
         <div
-          [ngClass]="{'open': isOpenFather(item.index)}"
+          [ngClass]="{ 'sidebar__father--open': isOpenFather(item.index) }"
           class="sidebar__childs d-flex flex-column"
         >
-          <div 
-            class="sidebar__childs__title d-flex justify-content-between" 
+          <div
+            class="sidebar__childs__title d-flex justify-content-between"
+            [ngClass]="{ 'sidebar__child--center': !sidebar.expanded }"
             (click)="openItemMenu(item)"
           >
             <span>{{ item.title }}</span>
-            <
+            <span *ngIf="sidebar.expanded">&lt;</span>
           </div>
 
           @for (itemFilho of item.filhos; track itemFilho.index) {
-          <div [routerLink]="item.link + '/' + itemFilho.link">
+          <div 
+            [ngClass]="{ 'sidebar__child--center': !sidebar.expanded }"
+            [routerLink]="item.link + '/' + itemFilho.link"
+          >
             <img [src]="itemFilho.icon" />
-            <span>{{ itemFilho.title }}</span>
+            <span *ngIf="sidebar.expanded">{{ itemFilho.title }}</span>
           </div>
           }
         </div>
@@ -34,13 +44,14 @@
         class="sidebar__no-childs"
         (click)="openItemMenu(item)"
         [routerLink]="item.link"
+        [ngClass]="{ 'sidebar__child--center': !sidebar.expanded }"
       >
         <img [src]="item.icon" />
-        <span>{{ item.title }}</span>
+        <span *ngIf="sidebar.expanded">{{ item.title }}</span>
       </div>
       }
     </div>
   </div>
 
-  <div class="sidebar__open-close"><</div>
+  <div class="sidebar__open-close" (click)="expandRetractSidebar()">&lt;</div>
 </section>
