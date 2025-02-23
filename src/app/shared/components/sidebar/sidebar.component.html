@@ -1,11 +1,13 @@
 <section
   class="sidebar d-flex"
-  [ngClass]="sidebar.expanded ? 'sidebar__width--250' : 'sidebar__width--auto'"
+  [ngClass]="{ 'sidebar__width--250': sidebar.expanded }"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
 >
   <div class="sidebar__content">
     <div class="sidebar__logo">
       <img 
-        [ngClass]="sidebar.expanded ? 'sidebar__logo-width--30' : 'sidebar__logo-width--70'"
+        [ngClass]="{ 'sidebar__logo-width--70': !sidebar.expanded }"
         src="/assets/images/logo.png" alt="Logo" 
       />
       <h4>Closet</h4>
@@ -52,6 +54,4 @@
       }
     </div>
   </div>
-
-  <div class="sidebar__open-close" (click)="expandRetractSidebar()">&lt;</div>
 </section>

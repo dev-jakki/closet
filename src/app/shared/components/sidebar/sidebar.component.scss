@@ -1,4 +1,5 @@
 .sidebar {
+  width: min-content;
   height: 100vh;
   background-color: var(--color-primary);
   color: var(--color-primary);
@@ -17,7 +18,10 @@
   
   h4 {
     font-weight: 400;
-    letter-spacing: 3px;
+  }
+
+  img {
+    width: 30%;
   }
 }
 
@@ -59,15 +63,6 @@
   }
 }
 
-.sidebar__open-close {
-  height: 55px;
-  background-color: var(--color-primary-100);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  color: var(--white);
-}
-
 // Controladores
 .sidebar__father--open {
   height: max-content !important;
@@ -77,20 +72,12 @@
   width: 250px;
 }
 
-.sidebar__width--auto {
-  width: min-content;
-}
-
 .sidebar__child--center {
   display: flex;
   justify-content: center !important;
   padding: 0 !important;
 }
 
-.sidebar__logo-width--30 {
-  width: 30%;
-}
-
 .sidebar__logo-width--70 {
-  width: 70%;
+  width: 70% !important;
 }

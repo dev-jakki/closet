@@ -12,7 +12,7 @@ export class SidebarComponent {
 
   public sidebar: Sidebar = {
     opened: [],
-    expanded: true,
+    expanded: false,
   }
   
   public menus: Menus[] = [
@@ -101,17 +101,6 @@ export class SidebarComponent {
     }
   }
 
-  // Abre todos os items do sidebar
-  private expandAllItems() {
-    this.sidebar.opened = [];
-
-    this.menus.map(item => {
-      if (item.index && item.filhos) {
-        this.sidebar.opened.push(item.index);
-      }
-    });
-  }
-
   // Abre e fecha itens filhos
   public isOpenFather(index: number | undefined) {
     if (index) {
@@ -129,9 +118,13 @@ export class SidebarComponent {
     return;
   }
   
-  // Expande e retrai o sidebar
-  public expandRetractSidebar() {
-    this.sidebar.expanded = !this.sidebar.expanded;
-    this.expandAllItems();
+  // Evento de passar o mouse para expandir a sidebar
+  onMouseEnter() {
+    this.sidebar.expanded = true;
+  }
+
+  // Evento de sair com o mouse para retrair a sidebar
+  onMouseLeave() {
+    this.sidebar.expanded = false;
   }
 }
