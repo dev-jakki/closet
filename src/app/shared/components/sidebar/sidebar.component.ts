@@ -118,12 +118,10 @@ export class SidebarComponent {
     return;
   }
   
-  // Evento de passar o mouse para expandir a sidebar
   onMouseEnter() {
     this.sidebar.expanded = true;
   }
 
-  // Evento de sair com o mouse para retrair a sidebar
   onMouseLeave() {
     this.sidebar.expanded = false;
   }

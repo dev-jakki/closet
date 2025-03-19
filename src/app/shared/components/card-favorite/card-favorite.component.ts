@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-favorite',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './card-favorite.component.html',
   styleUrl: './card-favorite.component.scss',
 })
-export class CardFavoriteComponent {}
+export class CardFavoriteComponent {
+  @Input() public image = '';
+}
