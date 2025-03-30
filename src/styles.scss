@@ -19,8 +19,27 @@ body {
   --color-primary-700: #FFEDF9;
   --white: #ffffff;
   --black: #141414;
+  --gray: rgba(0, 0, 0, 0.05);
+  --red: #ff0000;
 }
 
 .ant-drawer-header, .ant-drawer-body {
   padding: 16px !important;
+}
+
+em {
+  color: var(--red);
+}
+
+.clothe-btn-add {
+  background-color: var(--color-primary-100);
+  color: var(--white);
+  border-radius: 4px;
+  padding: 8px 16px;
+  transition: all .3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-primary);
+  }
 }

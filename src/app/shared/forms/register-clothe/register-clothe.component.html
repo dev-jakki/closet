@@ -1,35 +1,73 @@
-<form [formGroup]="registerClotheForm">
-  <img [src]="previewImage" style="width: 100%" />
+<section class="register-clothe d-flex flex-column">
+  <form
+    [formGroup]="registerClotheForm"
+    class="register-clothe__form row d-flex flex-column"
+  >
+    <div class="register-clothe__container col-12">
+      <div class="register-clothe__container__content">
+        <img class="register-clothe__content__image" [src]="imageSelected" />
 
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6" [nzOffset]="3">Imagem</nz-form-label>
+        <div class="register-clothe__content__box">
+          <p>Selecione</p>
 
-    <nz-form-control [nzSpan]="12" [nzOffset]="3">
-      <nz-upload
-        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        nzListType="picture-card"
-        [nzPreview]="handlePreview"
-      >
-        <div>
-          <nz-icon nzType="plus" />
-          <div style="margin-top: 8px">Upload</div>
+          <input
+            #file
+            type="file"
+            formControlName="secao"
+            accept="image/png, image/jpg, image/jpeg"
+            (change)="changeFile()"
+          />
         </div>
-      </nz-upload>
-    </nz-form-control>
-  </nz-form-item>
+      </div>
+    </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6" [nzOffset]="3">Seção</nz-form-label>
+    <div class="col-12 mt-2">
+      <label>Qual seção? <em>*</em></label>
 
-    <nz-form-control [nzSpan]="12" [nzOffset]="3">
-      <!-- <nz-tree-select
-            style="width: 250px"
-            nzId="index"
-            [nzNodes]="menus"
-            nzPlaceHolder="Selecione"
-            [nzMultiple]="false"
-            [nzCheckable]="true"
-          ></nz-tree-select> -->
-    </nz-form-control>
-  </nz-form-item>
-</form>
+      <nz-select
+        nzAllowClear
+        nzPlaceHolder="Escolha"
+        formControlName="secao"
+        class="w-100"
+      >
+        @for (option of menusOptions; track option) {
+        <nz-option
+          [nzValue]="option.index"
+          [nzLabel]="option.title"
+        ></nz-option>
+        }
+      </nz-select>
+    </div>
+
+    <div class="col-12">
+      <label>Roupa limpa? <em>*</em></label>
+
+      <nz-select
+        nzAllowClear
+        nzPlaceHolder="Escolha"
+        formControlName="limpa"
+        class="w-100"
+      >
+        @for (option of clotheOptions; track option) {
+        <nz-option
+          [nzValue]="option.value"
+          [nzLabel]="option.text"
+        ></nz-option>
+        }
+      </nz-select>
+    </div>
+  </form>
+
+  <div
+    class="d-flex flex-column-reverse justify-content-end flex-sm-row mt-2"
+    style="row-gap: 8px"
+  >
+    <button
+      class="clothe-btn-add w-100"
+      [disabled]="registerClotheForm.invalid"
+      (click)="addClothe()"
+    >
+      Adicionar
+    </button>
+  </div>
+</section>

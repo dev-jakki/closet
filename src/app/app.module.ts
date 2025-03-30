@@ -16,7 +16,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 import { provideNzI18n } from 'ng-zorro-antd/i18n';
 import { pt_BR } from 'ng-zorro-antd/i18n';
@@ -45,7 +45,7 @@ registerLocaleData(pt);
     ReactiveFormsModule,
     NzUploadModule,
     NzFormModule,
-    NzTreeSelectModule,
+    NzSelectModule,
   ],
   providers: [
     provideNzI18n(pt_BR),

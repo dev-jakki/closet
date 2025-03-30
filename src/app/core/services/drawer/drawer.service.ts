@@ -13,7 +13,6 @@ export class DrawerService {
   config$ = this.configSubject.asObservable();
 
   open(config: DrawerOpenParams) {
-    console.log(config)
     this.configSubject.next(config);
     this.visibleSubject.next(true);
   }

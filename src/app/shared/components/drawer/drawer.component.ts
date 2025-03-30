@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { DrawerService } from '../../../core/services/drawer/drawer.service';
 
 @Component({
@@ -13,10 +13,7 @@ export class DrawerComponent {
   
   constructor(private drawerService: DrawerService) {
     this.drawerService.visible$.subscribe((status) => (this.visible = status));
-    this.drawerService.config$.subscribe((config) => {
-      this.config = config
-      console.log(this.config)
-    });
+    this.drawerService.config$.subscribe((config) => (this.config = config));
   }
 
   close() {

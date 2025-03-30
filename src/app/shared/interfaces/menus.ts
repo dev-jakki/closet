@@ -3,7 +3,5 @@ export interface Menus {
   title: string;
   icon: string;
   link: string;
-  filhos: MenusFilhos[] | null;
+  filhos: Menus[] | null;
 }
-
-type MenusFilhos = Omit<Menus, 'filhos'>;

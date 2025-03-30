@@ -1,0 +1,56 @@
+$image-size: 250px;
+
+.register-clothe, .register-clothe__form {
+  row-gap: 8px;
+}
+
+.register-clothe__container {
+  text-align: center;
+  position: relative;
+
+  &__content {
+    position: relative;
+    width: $image-size;
+    height: $image-size;
+    left: 50%;
+    border-radius: 8px;
+    border: 3px solid var(--gray);
+    transform: translateX(-50%);
+    pointer-events: auto;
+    overflow: hidden;
+    background-color: var(--gray);
+  }
+}
+
+.register-clothe__content__image {
+  width: $image-size;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.register-clothe__content__box {
+  > p {
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -15px;
+    padding: 5px;
+    color: var(--black);
+    background-color: var(--gray);
+    width: $image-size;
+  }
+
+  > input {
+    width: $image-size;
+    height: $image-size + 30px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}

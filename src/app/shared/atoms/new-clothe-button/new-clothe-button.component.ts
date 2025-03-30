@@ -18,12 +18,10 @@ export class NewClotheButtonComponent {
   ) {}
 
   public onAddClothe() {
-    console.log("chamou botao")
     const drawerContent: DrawerContent = {
       component: RegisterClotheComponent,
     };
     
-    console.log("abriu modal")
     this.drawerService.open({
       title: 'Nova vestimenta',
       drawerContent: drawerContent,
