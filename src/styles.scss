@@ -20,3 +20,7 @@ body {
   --white: #ffffff;
   --black: #141414;
 }
+
+.ant-drawer-header, .ant-drawer-body {
+  padding: 16px !important;
+}

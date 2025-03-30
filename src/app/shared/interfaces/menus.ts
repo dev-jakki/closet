@@ -1,5 +1,5 @@
 export interface Menus {
-  index?: number;
+  index: number;
   title: string;
   icon: string;
   link: string;

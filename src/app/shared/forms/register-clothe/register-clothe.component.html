@@ -1,0 +1,35 @@
+<form [formGroup]="registerClotheForm">
+  <img [src]="previewImage" style="width: 100%" />
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" [nzOffset]="3">Imagem</nz-form-label>
+
+    <nz-form-control [nzSpan]="12" [nzOffset]="3">
+      <nz-upload
+        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        nzListType="picture-card"
+        [nzPreview]="handlePreview"
+      >
+        <div>
+          <nz-icon nzType="plus" />
+          <div style="margin-top: 8px">Upload</div>
+        </div>
+      </nz-upload>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" [nzOffset]="3">Seção</nz-form-label>
+
+    <nz-form-control [nzSpan]="12" [nzOffset]="3">
+      <!-- <nz-tree-select
+            style="width: 250px"
+            nzId="index"
+            [nzNodes]="menus"
+            nzPlaceHolder="Selecione"
+            [nzMultiple]="false"
+            [nzCheckable]="true"
+          ></nz-tree-select> -->
+    </nz-form-control>
+  </nz-form-item>
+</form>

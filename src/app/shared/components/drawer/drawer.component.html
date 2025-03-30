@@ -1,0 +1,19 @@
+<nz-drawer
+  *ngIf="visible"
+  [nzClosable]="true"
+  [nzVisible]="visible"
+  nzPlacement="right"
+  [nzWidth]="config?.width"
+  [nzTitle]="config?.title"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <ng-container *ngIf="config.drawerContent.component; else noContent">
+      <ng-container *ngComponentOutlet="config.drawerContent.component"></ng-container>
+    </ng-container>
+
+    <ng-template #noContent>
+      <p>Sem conteúdo</p>
+    </ng-template>
+  </ng-container>
+</nz-drawer>
