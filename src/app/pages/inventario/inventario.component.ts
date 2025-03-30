@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-inventario',
   standalone: false,
   templateUrl: './inventario.component.html',
-  styleUrl: './inventario.component.scss'
+  styleUrl: './inventario.component.scss',
 })
-export class InventarioComponent {
-
-}
+export class InventarioComponent {}

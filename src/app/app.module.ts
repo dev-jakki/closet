@@ -7,6 +7,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LooksComponent } from './pages/looks/looks.component';
 import { CardFavoriteComponent } from './shared/components/card-favorite/card-favorite.component';
+import { NewClotheComponent } from './shared/components/new-clothe/new-clothe.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CardFavoriteComponent } from './shared/components/card-favorite/card-fa
     SidebarComponent,
     DashboardComponent,
     CardFavoriteComponent,
+    NewClotheComponent,
   ],
   imports: [
     BrowserModule,

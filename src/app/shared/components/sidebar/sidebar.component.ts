@@ -30,21 +30,25 @@ export class SidebarComponent {
       link: 'inventario',
       filhos: [
         {
+          index: 3,
           title: 'Vestidos',
           icon: '/assets/icons/vestido.svg',
           link: 'vestidos',
         },
         {
+          index: 4,
           title: 'Blusas',
           icon: '/assets/icons/blusa.svg',
           link: 'blusas',
         },
         {
+          index: 5,
           title: 'Calças',
           icon: '/assets/icons/calca.svg',
           link: 'calcas',
         },
         {
+          index: 6,
           title: 'Saias',
           icon: '/assets/icons/saia.svg',
           link: 'saias',
@@ -52,27 +56,31 @@ export class SidebarComponent {
       ],
     },
     {
-      index: 3,
+      index: 7,
       title: 'Looks',
       icon: '',
       link: 'looks',
       filhos: [
         {
+          index: 8,
           title: 'Casual',
           icon: '/assets/icons/salto.svg',
           link: 'casual',
         },
         {
+          index: 9,
           title: 'Formal',
           icon: '/assets/icons/bolsa.svg',
           link: 'formal',
         },
         {
+          index: 10,
           title: 'Praia',
           icon: '/assets/icons/sol-mar.svg',
           link: 'praia',
         },
         {
+          index: 11,
           title: 'Festas',
           icon: '/assets/icons/tarcas.svg',
           link: 'festa',
@@ -81,7 +89,7 @@ export class SidebarComponent {
     },
   ];
 
-  // Se os items de um item estiver a mostra, ele é escondido, e vice-versa
+  // Se os items de um item estiverem a mostra, ele é escondido, e vice-versa
   public openItemMenu(data: Menus) {
     if (data.index && data.filhos) {
       let isOpen = false;
