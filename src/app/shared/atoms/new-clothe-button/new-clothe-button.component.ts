@@ -3,6 +3,9 @@ import { DrawerService } from '../../../core/services/drawer/drawer.service';
 import { RegisterClotheComponent } from '../../forms/register-clothe/register-clothe.component';
 import { DrawerContent } from '../../interfaces/drawer-content';
 import { NewClotheButtonService } from '../../../core/services/new-clothe/new-clothe.service';
+import { PosicaoX, PosicaoY } from '../../enums';
+import { DrawerOptions } from '../../interfaces/drawer-options';
+import { DrawerOpenParams } from '../../interfaces/drawer-open-params';
 
 @Component({
   selector: 'app-new-clothe-button',
@@ -18,13 +21,28 @@ export class NewClotheButtonComponent {
   ) {}
 
   public onAddClothe() {
-    const drawerContent: DrawerContent = {
+    const modalContent: DrawerContent = {
       component: RegisterClotheComponent,
+      inputs: {},
     };
-    
-    this.drawerService.open({
-      title: 'Nova vestimenta',
-      drawerContent: drawerContent,
+
+    const options: DrawerOptions = {
+      positionX: PosicaoX.Direita,
+      positionY: PosicaoY.Topo,
+      height: "100%",
+      size: "auto",
+      isDraggable: true,
+    };
+
+    const modalParams: DrawerOpenParams = {
+      title: "Adicionar vestimenta",
+      modalContent,
+      options,
+    };
+
+    const modalRef = this.drawerService.open(modalParams);
+
+    modalRef.result.finally(() => {
     });
   }
 }

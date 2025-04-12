@@ -1,0 +1,47 @@
+.modal .modal-content {
+    height: 100%;
+    border-radius: 8px;
+  }
+  
+  .inf-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 16px;
+    gap: 16px;
+  }
+  
+  .inforplus-modal__drag {
+    font-size: 22px;
+    color: var(--color-secondary);
+  }
+  
+  .inf-modal__close {
+    position: absolute;
+    right: 0;
+  }
+  
+  .inf-modal__body {
+    padding: 0px 16px 0px 16px;
+  
+    & > :first-child {
+      width: 100%;
+    }
+  }
+  
+  ::ng-deep .modal .modal-xxl {
+    width: calc(100% - 9rem) !important;
+    max-width: none;
+  }
+  
+  ::ng-deep .modal .modal-full {
+    width: 100% !important;
+    max-width: none;
+  }
+  
+  @media screen and (max-width: 576px) {
+    ::ng-deep .modal .modal-xxl {
+      width: 100% !important;
+    }
+  }
+  
