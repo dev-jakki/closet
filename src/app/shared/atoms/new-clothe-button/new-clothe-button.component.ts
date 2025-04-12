@@ -21,14 +21,14 @@ export class NewClotheButtonComponent {
   ) {}
 
   public onAddClothe() {
-    const modalContent: DrawerContent = {
+    const drawerContent: DrawerContent = {
       component: RegisterClotheComponent,
       inputs: {},
     };
 
     const options: DrawerOptions = {
-      positionX: PosicaoX.Direita,
-      positionY: PosicaoY.Topo,
+      positionX: PosicaoX.Right,
+      positionY: PosicaoY.Top,
       height: "100%",
       size: "auto",
       isDraggable: true,
@@ -36,7 +36,7 @@ export class NewClotheButtonComponent {
 
     const modalParams: DrawerOpenParams = {
       title: "Adicionar vestimenta",
-      modalContent,
+      drawerContent,
       options,
     };
 

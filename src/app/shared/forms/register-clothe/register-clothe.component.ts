@@ -101,7 +101,7 @@ export class RegisterClotheComponent implements OnInit {
 
   public addClothe() {}
 
-  podeFecharModal() {
+  canCloseDrawer() {
     return true;
   }
 }

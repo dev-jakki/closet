@@ -1,6 +1,5 @@
 export enum PosicaoX {
-    Centro = 'centro',
-    Esquerda = 'esquerda',
-    Direita = 'direita',
+  Center = 'center',
+  Left = 'left',
+  Right = 'right',
 }
-  

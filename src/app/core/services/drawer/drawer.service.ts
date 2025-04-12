@@ -6,7 +6,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { DrawerComponent } from '../../../shared/components/drawer/drawer.component';
 import { PosicaoX, PosicaoY } from '../../../shared/enums';
 
-const CSS_GERAL = 'width: 100%; margin: 0; padding: 0;';
+const CSS_ALL = 'width: 100%; margin: 0; padding: 0;';
 const CSS_CENTER_X = 'left: 50%;';
 const CSS_CENTER_Y = 'top: 50%;';
 const CSS_TOP = 'top: 0;';
@@ -18,14 +18,8 @@ const CSS_LEFT = 'left: 0;';
   providedIn: 'root',
 })
 export class DrawerService {
-  constructor(private modalService: NgbModal) {}
 
-  /**
-   * Abre um modal com base nos parâmetros fornecidos.
-   *
-   * @param params - Parâmetros de entrada para a abertura do modal.
-   * @returns Uma referência para o modal aberto.
-   */
+  constructor(private drawerService: NgbModal) {}
 
   public open(params: DrawerOpenParams) {
     const options =
@@ -35,71 +29,68 @@ export class DrawerService {
     params.options.backdrop = params.options.backdrop ?? 'static';
     params.options.keyboard = params.options?.keyboard ?? false;
 
-    const modalRef: NgbModalRef = this.obterModalRef(params, options);
-    const modalDialog: HTMLDivElement = this.obterDialogModal(modalRef);
-    const modalContent: HTMLDivElement = this.obterContentModal(modalDialog);
+    const drawerRef: NgbModalRef = this.getDrawerRef(params, options);
+    const drawerDialog: HTMLDivElement = this.getDialogDrawer(drawerRef);
+    const drawerContent: HTMLDivElement = this.getContentDrawer(drawerDialog);
 
-    modalDialog.classList.add('inf-modal-dialog');
+    this.setStyleDrawerDialog(drawerDialog, options);
+    this.setStyleDrawerContent(drawerContent, options.height);
 
-    this.setarEstiloModalDialog(modalDialog, options);
-    this.setarEstiloModalContent(modalContent, options.height);
-
-    return modalRef;
+    return drawerRef;
   }
 
-  private obterContentModal(modalDialog: HTMLDivElement): HTMLDivElement {
-    const modalContentClass = 'modal-content';
+  private getContentDrawer(drawerDialog: HTMLDivElement): HTMLDivElement {
+    const drawerContentClass = 'modal-content';
 
-    return modalDialog.getElementsByClassName(
-      modalContentClass
+    return drawerDialog.getElementsByClassName(
+      drawerContentClass
     )[0] as HTMLDivElement;
   }
 
-  private definirBordaModalContent() {
+  private defineBorderDrawerContent() {
     return 'border: none;';
   }
 
-  private obterModalRef(
-    params: { title: string; modalContent: DrawerContent },
+  private getDrawerRef(
+    params: { title: string; drawerContent: DrawerContent },
     options: DrawerOptions
   ): NgbModalRef {
-    const modalRef: NgbModalRef = this.modalService.open(
+    const drawerRef: NgbModalRef = this.drawerService.open(
       DrawerComponent,
       options
     );
-    const componentInstance = modalRef.componentInstance as DrawerComponent;
-    const modalContainer = this.obterDialogModal(modalRef)?.parentElement;
+    const componentInstance = drawerRef.componentInstance as DrawerComponent;
+    const drawerContainer = this.getDialogDrawer(drawerRef)?.parentElement;
 
     componentInstance.title = params.title;
-    componentInstance.isDraggable = options.isDraggable ?? true;
-    componentInstance.modalContainer = modalContainer;
+    componentInstance.drawerContainer = drawerContainer;
 
     if (options.customHeader) {
-      componentInstance.modalHeaderCustom = options.customHeader;
+      componentInstance.drawerHeaderCustom = options.customHeader;
     }
     
-    componentInstance.modalContent = {
-      component: params.modalContent.component,
-      inputs: params.modalContent.inputs,
+    componentInstance.drawerContent = {
+      component: params.drawerContent.component,
+      inputs: params.drawerContent.inputs,
     };
 
-    return modalRef;
+    return drawerRef;
   }
 
-  private setarEstiloModalContent(
-    modalContent: HTMLDivElement,
+  private setStyleDrawerContent(
+    drawerContent: HTMLDivElement,
     height: string = 'auto'
   ) {
-    const modalContentProp = 'style';
-    let modalContentStyles = '';
+    const drawerContentProp = 'style';
+    let drawerContentStyles = '';
 
-    modalContentStyles += this.definirBordaModalContent();
-    modalContentStyles += this.definirAlturaModalContent(height);
+    drawerContentStyles += this.defineBorderDrawerContent();
+    drawerContentStyles += this.defineHeightDrawerContent(height);
 
-    modalContent.setAttribute(modalContentProp, modalContentStyles);
+    drawerContent.setAttribute(drawerContentProp, drawerContentStyles);
   }
 
-  private definirAlturaModalContent(height: string) {
+  private defineHeightDrawerContent(height: string) {
     height = height.trim() === '100%' ? '100vh' : height;
 
     return `
@@ -109,43 +100,43 @@ export class DrawerService {
     `;
   }
 
-  private setarEstiloModalDialog(
-    modalDialog: HTMLDivElement,
+  private setStyleDrawerDialog(
+    drawerDialog: HTMLDivElement,
     options: DrawerOptions
   ) {
-    const modalDialogProp = 'style';
+    const drawerDialogProp = 'style';
     let dialogModalCss = '';
 
-    dialogModalCss += this.definirModalAltura(options.height);
-    dialogModalCss += this.definirModalPosicao(
+    dialogModalCss += this.defineDrawerHeight(options.height);
+    dialogModalCss += this.defineDrawerPosition(
       options.positionX,
       options.positionY
     );
 
-    modalDialog.setAttribute(modalDialogProp, dialogModalCss);
+    drawerDialog.setAttribute(drawerDialogProp, dialogModalCss);
   }
 
-  private definirModalAltura(height: string = 'auto') {
+  private defineDrawerHeight(height: string = 'auto') {
     return `min-height: ${height}; height: auto;`;
   }
 
-  private obterDialogModal(modalRef: NgbModalRef): HTMLDivElement {
+  private getDialogDrawer(drawerRef: NgbModalRef): HTMLDivElement {
     const PROP_WINDOW_CMPT_REF = '_windowCmptRef';
 
-    const modalElement: HTMLElement =
-      modalRef[PROP_WINDOW_CMPT_REF].location.nativeElement;
+    const drawerElement: HTMLElement =
+      drawerRef[PROP_WINDOW_CMPT_REF].location.nativeElement;
 
-    return modalElement.getElementsByTagName('div')[0];
+    return drawerElement.getElementsByTagName('div')[0];
   }
 
-  private definirModalPosicao(
-    positionX: PosicaoX = PosicaoX.Centro,
-    positionY: PosicaoY = PosicaoY.Centro
+  private defineDrawerPosition(
+    positionX: PosicaoX = PosicaoX.Center,
+    positionY: PosicaoY = PosicaoY.Center
   ) {
-    let cssPosition = CSS_GERAL;
+    let cssPosition = CSS_ALL;
 
-    cssPosition += this.definirPosicaoX(positionX);
-    cssPosition += this.definirPosicaoY(positionY);
+    cssPosition += this.definePositionX(positionX);
+    cssPosition += this.definePositionY(positionY);
 
     cssPosition += this.definirTranslateXY(positionX, positionY);
 
@@ -153,51 +144,51 @@ export class DrawerService {
   }
 
   private definirTranslateXY(positionX: PosicaoX, positionY: PosicaoY): string {
-    if (positionX === PosicaoX.Direita && positionY === PosicaoY.Fundo) {
-      return this.obterPropiedadeTransform('-100%', '-100%');
-    } else if (positionX === PosicaoX.Direita) {
-      return this.obterPropiedadeTransform('-100%', '0');
+    if (positionX === PosicaoX.Right && positionY === PosicaoY.Bottom) {
+      return this.getPropertyTransform('-100%', '-100%');
+    } else if (positionX === PosicaoX.Right) {
+      return this.getPropertyTransform('-100%', '0');
     } else if (
-      positionX === PosicaoX.Esquerda &&
-      positionY === PosicaoY.Fundo
+      positionX === PosicaoX.Left &&
+      positionY === PosicaoY.Bottom
     ) {
-      return this.obterPropiedadeTransform('0', '-100%');
-    } else if (positionX === PosicaoX.Centro && positionY === PosicaoY.Centro) {
-      return this.obterPropiedadeTransform('-50%', '-50%');
+      return this.getPropertyTransform('0', '-100%');
+    } else if (positionX === PosicaoX.Center && positionY === PosicaoY.Center) {
+      return this.getPropertyTransform('-50%', '-50%');
     } else if (
-      positionX === PosicaoX.Esquerda &&
-      positionY === PosicaoY.Centro
+      positionX === PosicaoX.Left &&
+      positionY === PosicaoY.Center
     ) {
-      return this.obterPropiedadeTransform('0', '-50%');
-    } else if (positionY === PosicaoY.Fundo) {
-      return this.obterPropiedadeTransform('-50%', '0');
-    } else if (positionX === PosicaoX.Centro) {
-      return this.obterPropiedadeTransform('-50%', '0');
+      return this.getPropertyTransform('0', '-50%');
+    } else if (positionY === PosicaoY.Bottom) {
+      return this.getPropertyTransform('-50%', '0');
+    } else if (positionX === PosicaoX.Center) {
+      return this.getPropertyTransform('-50%', '0');
     }
 
-    return this.obterPropiedadeTransform('0', '0');
+    return this.getPropertyTransform('0', '0');
   }
 
-  private obterPropiedadeTransform(x: string, y: string): string {
+  private getPropertyTransform(x: string, y: string): string {
     return `transform: translate(${x}, ${y});`;
   }
 
-  private definirPosicaoY(positionY: PosicaoY): string {
+  private definePositionY(positionY: PosicaoY): string {
     switch (positionY) {
-      case PosicaoY.Topo:
+      case PosicaoY.Top:
         return CSS_TOP;
-      case PosicaoY.Fundo:
+      case PosicaoY.Bottom:
         return CSS_BOTTOM;
       default:
         return CSS_CENTER_Y;
     }
   }
 
-  private definirPosicaoX(positionX: PosicaoX): string {
+  private definePositionX(positionX: PosicaoX): string {
     switch (positionX) {
-      case PosicaoX.Esquerda:
+      case PosicaoX.Left:
         return CSS_LEFT;
-      case PosicaoX.Direita:
+      case PosicaoX.Right:
         return CSS_RIGHT;
       default:
         return CSS_CENTER_X;

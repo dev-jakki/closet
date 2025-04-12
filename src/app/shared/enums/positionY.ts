@@ -1,5 +1,5 @@
 export enum PosicaoY {
-    Centro = 'centro',
-    Topo = 'topo',
-    Fundo = 'fundo',
+  Center = 'center',
+  Top = 'top',
+  Bottom = 'bottom',
 }

@@ -16,10 +16,12 @@ body {
 :root {
   --color-primary: #EC60A3;
   --color-primary-100: #FF73B6;
+  --color-primary-300: #ffaed5;
   --color-primary-700: #FFEDF9;
   --white: #ffffff;
   --black: #141414;
-  --gray: rgba(0, 0, 0, 0.05);
+  --shadow: #00000033;
+  --gray: #0000000d;
   --red: #ff0000;
 }
 
@@ -38,4 +40,10 @@ em {
   &:hover {
     background-color: var(--color-primary);
   }
+}
+
+select {
+  border: 2px solid var(--shadow);
+  border-radius: 4px;
+  padding: 6px;
 }

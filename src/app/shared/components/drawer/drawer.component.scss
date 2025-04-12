@@ -3,30 +3,8 @@
     border-radius: 8px;
   }
   
-  .inf-modal {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 24px 16px;
-    gap: 16px;
-  }
-  
-  .inforplus-modal__drag {
-    font-size: 22px;
-    color: var(--color-secondary);
-  }
-  
-  .inf-modal__close {
-    position: absolute;
-    right: 0;
-  }
-  
-  .inf-modal__body {
-    padding: 0px 16px 0px 16px;
-  
-    & > :first-child {
-      width: 100%;
-    }
+  .drawer__body {
+    padding: 16px;
   }
   
   ::ng-deep .modal .modal-xxl {

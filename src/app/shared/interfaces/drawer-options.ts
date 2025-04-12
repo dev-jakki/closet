@@ -4,8 +4,8 @@ import { Injector, Type } from '@angular/core';
 
 export class DrawerOptions implements NgbModalOptions {
   height?: string = 'auto';
-  positionX?: PosicaoX = PosicaoX.Centro;
-  positionY?: PosicaoY = PosicaoY.Centro;
+  positionX?: PosicaoX = PosicaoX.Center;
+  positionY?: PosicaoY = PosicaoY.Center;
   isDraggable?: boolean = true;
   animation?: boolean = false;
   backdrop?: boolean | 'static' = 'static';

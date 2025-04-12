@@ -10,7 +10,7 @@ import { CardFavoriteComponent } from './shared/components/card-favorite/card-fa
 import { NewClotheButtonComponent } from './shared/atoms/new-clothe-button/new-clothe-button.component';
 import { RegisterClotheComponent } from './shared/forms/register-clothe/register-clothe.component';
 import { DrawerComponent } from './shared/components/drawer/drawer.component';
-import { InfDrawerHeaderComponent } from './shared/components/drawer/components/inf-modal-header.component';
+import { DrawerHeaderComponent } from './shared/components/drawer/components/drawer-header.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { InfDrawerHeaderComponent } from './shared/components/drawer/components/
     NewClotheButtonComponent,
     RegisterClotheComponent,
     DrawerComponent,
-    InfDrawerHeaderComponent,
+    DrawerHeaderComponent,
   ],
   imports: [
     BrowserModule,
