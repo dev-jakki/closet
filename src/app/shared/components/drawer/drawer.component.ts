@@ -30,7 +30,7 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
   private componenteHeaderRef: ComponentRef<any> = <ComponentRef<any>>{};
 
   @Input() title: string = '';
-  @Input() modalHeaderCustom: Type<any> = <Type<any>>{};
+  @Input() modalHeaderCustom?: Type<any>;
   @Input() modalContent: DrawerContent = <DrawerContent>{};
   @Input() isDraggable: boolean = true;
   @Input() closeIcon = 'close';

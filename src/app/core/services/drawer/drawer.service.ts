@@ -74,7 +74,10 @@ export class DrawerService {
     componentInstance.isDraggable = options.isDraggable ?? true;
     componentInstance.modalContainer = modalContainer;
 
-    componentInstance.modalHeaderCustom = options.customHeader;
+    if (options.customHeader) {
+      componentInstance.modalHeaderCustom = options.customHeader;
+    }
+    
     componentInstance.modalContent = {
       component: params.modalContent.component,
       inputs: params.modalContent.inputs,

@@ -8,8 +8,6 @@ export class DrawerOptions implements NgbModalOptions {
   positionY?: PosicaoY = PosicaoY.Centro;
   isDraggable?: boolean = true;
   animation?: boolean = false;
-  tituloModalConfirmacao?: string;
-  textoModalConfirmacao?: string;
   backdrop?: boolean | 'static' = 'static';
   size?: 'sm' | 'lg' | 'xl' | 'xxl' | 'full' | string = 'lg';
   customHeader?: Type<any>;

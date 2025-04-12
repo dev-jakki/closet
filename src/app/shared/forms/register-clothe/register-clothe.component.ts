@@ -100,4 +100,8 @@ export class RegisterClotheComponent implements OnInit {
   }
 
   public addClothe() {}
+
+  podeFecharModal() {
+    return true;
+  }
 }
