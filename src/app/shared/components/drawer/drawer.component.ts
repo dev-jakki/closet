@@ -21,18 +21,18 @@ import type { DrawerContent } from '../../interfaces/drawer-content';
 })
 export class DrawerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('contentContainer', { read: ViewContainerRef })
-  contentContainer!: ViewContainerRef;
+  private contentContainer!: ViewContainerRef;
 
   @ViewChild('drawerHeaderContainer', { read: ViewContainerRef, static: true })
-  drawerHeaderContainer!: ViewContainerRef;
+  private drawerHeaderContainer!: ViewContainerRef;
+  
+  @Input() public title: string = '';
+  @Input() public drawerHeaderCustom?: Type<any>;
+  @Input() public drawerContent: DrawerContent = <DrawerContent>{};
+  @Input() public drawerContainer: HTMLElement | null = null;
 
   private componentRef: ComponentRef<any> = <ComponentRef<any>>{};
   private componenteHeaderRef: ComponentRef<any> = <ComponentRef<any>>{};
-
-  @Input() title: string = '';
-  @Input() drawerHeaderCustom?: Type<any>;
-  @Input() drawerContent: DrawerContent = <DrawerContent>{};
-  @Input() drawerContainer: HTMLElement | null = null;
 
   constructor(
     public modal: NgbActiveModal,
@@ -86,6 +86,16 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  private close() {
+    if (this.componentRef.instance.canCloseDrawer()) {
+      this.modal.close();
+    } else {
+      if (window.confirm('Tem certeza que deseja desistir?')) {
+        this.modal.close();
+      }
+    }
+  }
+
   ngOnDestroy() {
     if (this.componentRef) {
       this.componentRef?.changeDetectorRef.detach();
@@ -93,16 +103,6 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
 
     if (this.componenteHeaderRef) {
       this.componenteHeaderRef?.changeDetectorRef.detach();
-    }
-  }
-
-  close() {
-    if (this.componentRef.instance.canCloseDrawer()) {
-      this.modal.close();
-    } else {
-      if (window.confirm('Tem certeza que deseja desistir?')) {
-        this.modal.close();
-      }
     }
   }
 }

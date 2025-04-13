@@ -1,7 +1,10 @@
+import { CrudClothesService } from './../../../core/services/crud-clothes/crud-clothes.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Menus } from '../../interfaces/menus';
 import { SidebarService } from '../../../core/services/sidebar/sidebar.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
 
 const MAX_MB_SIZE = 2.5;
 
@@ -27,7 +30,9 @@ export class RegisterClotheComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private crudClothesService: CrudClothesService,
+    private modal: NgbActiveModal,
   ) {}
 
   ngOnInit(): void {
@@ -37,9 +42,9 @@ export class RegisterClotheComponent implements OnInit {
 
   private inicializeForm() {
     this.registerClotheForm = this.fb.group({
-      image: ['', [Validators.required]],
-      limpa: ['', [Validators.required]],
-      secao: ['', [Validators.required]],
+      image: [null, [Validators.required]],
+      clean: [null, [Validators.required]],
+      section: [null, [Validators.required]],
     });
   }
 
@@ -99,9 +104,29 @@ export class RegisterClotheComponent implements OnInit {
     return menusFreeChilds;
   }
 
-  public addClothe() {}
+  public canCloseDrawer() {
+    return !this.registerClotheForm.dirty;
+  }
 
-  canCloseDrawer() {
-    return true;
+  private closeModal() {
+    this.modal.close();
+  }
+
+  public addClothe() {
+    if (this.registerClotheForm.invalid || !this.imageSelected) return;
+
+    const formData = this.registerClotheForm.value;
+
+    const newClothe = {
+      id: uuidv4(),
+      section: Number(formData.section),
+      clean: formData.clean === "1" ? true : false,
+      image: this.imageSelected,
+      favorite: false,
+      createdAt: new Date().toISOString(),
+    };
+
+    this.crudClothesService.addClothe(newClothe);
+    this.closeModal();
   }
 }

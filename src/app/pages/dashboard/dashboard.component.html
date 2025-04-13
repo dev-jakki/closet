@@ -1,10 +1,11 @@
 <section class="dashboard">
   <h3>Dashboard</h3>
 
-  <h5>Favoritos</h5>
+  <h5>Todos</h5>
 
   <div class="dashboard__cards-favoritos">
-    <app-card-favorite></app-card-favorite>
-    <app-card-favorite></app-card-favorite>
+    @for (clothe of clothesData; track clothe.id) {
+      <app-card [clotheData]="clothe"></app-card>
+    }
   </div>
 </section>

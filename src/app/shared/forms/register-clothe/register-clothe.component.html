@@ -13,7 +13,7 @@
           <input
             #file
             type="file"
-            formControlName="secao"
+            formControlName="image"
             accept="image/png, image/jpg, image/jpeg"
             (change)="changeFile()"
           />
@@ -24,7 +24,7 @@
     <div class="col-12 mt-2">
       <label>Qual seção? <em>*</em></label>
 
-      <select placeholder="Escolha" formControlName="secao" class="w-100">
+      <select placeholder="Escolha" formControlName="section" class="w-100">
         @for (option of menusOptions; track option) {
         <option [value]="option.index">
           {{ option.title }}
@@ -36,7 +36,7 @@
     <div class="col-12">
       <label>Roupa limpa? <em>*</em></label>
 
-      <select placeholder="Escolha" formControlName="limpa" class="w-100">
+      <select placeholder="Escolha" formControlName="clean" class="w-100">
         @for (option of clotheOptions; track option) {
         <option [value]="option.value">
           {{ option.text }}
@@ -52,7 +52,6 @@
   >
     <button
       class="clothe-btn-add w-100"
-      [disabled]="registerClotheForm.invalid"
       (click)="addClothe()"
     >
       Adicionar

@@ -1,11 +1,11 @@
-.card-favorito {
+.card {
   width: clamp(240px, 240px, 240px);
   height: 310px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 
-  .bolha {
+  .clean {
     width: 40px;
     padding: 8px;
     position: absolute;
@@ -21,6 +21,7 @@
     justify-content: space-between;
 
     > img {
+      cursor: pointer;
       width: 20px;
     }
   }
