@@ -1,6 +1,7 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Clothe } from '../../shared/interfaces/clothe';
 import { CrudClothesService } from './../../core/services/crud-clothes/crud-clothes.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,14 +9,26 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, OnDestroy {
   public clothesData: Clothe[] = [];
+  private _subscribeUpdateDataClothes: Subscription = <Subscription>{};
 
   constructor(public crudClothesService: CrudClothesService) {}
 
   ngOnInit(): void {
     this.clothesData = this.crudClothesService.getClothes();
+    this.observeUpdateDataClothes();
   }
 
+  private observeUpdateDataClothes() {
+    this._subscribeUpdateDataClothes = this.crudClothesService.updateDataClothes.subscribe(() => {
+      this.clothesData = this.crudClothesService.getClothes();
+    });
+  }
 
+  ngOnDestroy() {
+    if (!!this._subscribeUpdateDataClothes) {
+      this._subscribeUpdateDataClothes.unsubscribe();
+    }
+  }
 }

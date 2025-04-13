@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Clothe } from '../../../shared/interfaces/clothe';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CrudClothesService {
-
+  public updateDataClothes: Subject<void> = new Subject();
+  
   constructor() {}
 
   public addClothe(clothe: Clothe) {
@@ -29,16 +31,15 @@ export class CrudClothesService {
     localStorage.setItem('clothes', JSON.stringify(updatedClothes));
   }
 
-  public favoriteClothe(id: string) {
+  public addRemoveFavoriteClothe(id: string) {
     const clothesData = this.getClothes();
 
-    const clotheIndex = clothesData.findIndex(
-      (clothe: Clothe) => clothe.id === id
-    );
-
-    if (clotheIndex !== -1) {
-      clothesData[clotheIndex].favorite = true;
-    }
+    clothesData.map(
+      (clothe: Clothe) => {
+        if (clothe.id === id) {
+          clothe.favorite = !clothe.favorite;
+        }
+    });
 
     localStorage.setItem('clothes', JSON.stringify(clothesData));
   }

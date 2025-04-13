@@ -128,5 +128,6 @@ export class RegisterClotheComponent implements OnInit {
 
     this.crudClothesService.addClothe(newClothe);
     this.closeModal();
+    this.crudClothesService.updateDataClothes.next();
   }
 }

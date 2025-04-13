@@ -15,9 +15,11 @@ export class CardComponent {
   
   public removeClothe() {
     this.crudClothesService.deleteClothe(this.clotheData.id);
+    this.crudClothesService.updateDataClothes.next();
   }
 
   public favoriteClothe() {
-    this.crudClothesService.favoriteClothe(this.clotheData.id);
+    this.crudClothesService.addRemoveFavoriteClothe(this.clotheData.id);
+    this.crudClothesService.updateDataClothes.next();
   }
 }
