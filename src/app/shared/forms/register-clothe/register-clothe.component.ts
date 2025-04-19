@@ -99,7 +99,9 @@ export class RegisterClotheComponent implements OnInit {
 
     menus.forEach((menu) => {
       if (menu.filhos === null || menu.filhos.length === 0) {
-        menusFreeChilds.push(menu);
+        if (menu.index !== 1) {
+          menusFreeChilds.push(menu);
+        }
       } else {
         const filhosSemFilhos = this.getMenusFreeChilds(menu.filhos);
         menusFreeChilds.push(...filhosSemFilhos);
