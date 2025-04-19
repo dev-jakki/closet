@@ -7,7 +7,7 @@
   <img class="image" [src]="clotheData.image" />
 
   <div class="card__footer">
-    <img (click)="removeClothe()" src="/assets/icons/lixeira.svg" />
-    <img (click)="favoriteClothe()" [src]="clotheData.favorite ? '/assets/icons/heart.svg' : '/assets/icons/heart-2.svg'" />
+    <img title="Suja" (click)="removeClothe()" src="/assets/icons/lixeira.svg" />
+    <img title="Favoritar" (click)="favoriteClothe()" [src]="clotheData.favorite ? '/assets/icons/heart.svg' : '/assets/icons/heart-2.svg'" />
   </div>
 </div>

@@ -10,25 +10,26 @@ import { CrudClothesService } from './../../core/services/crud-clothes/crud-clot
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  public clothesData: Clothe[] = [];
-  private _subscribeUpdateDataClothes: Subscription = <Subscription>{};
+  public clothesFavoriteData: Clothe[] = [];
+  public clothesCleanData: Clothe[] = [];
+  private _subscribeUpdateDataClothes: Subscription | null = null;
 
   constructor(public crudClothesService: CrudClothesService) {}
 
   ngOnInit(): void {
-    this.clothesData = this.crudClothesService.getClothes();
+    this.clothesFavoriteData = this.crudClothesService.getClothes({ favorite: true });
+    this.clothesCleanData = this.crudClothesService.getClothes({ clean: false });
     this.observeUpdateDataClothes();
   }
 
   private observeUpdateDataClothes() {
     this._subscribeUpdateDataClothes = this.crudClothesService.updateData.dashboard.subscribe(() => {
-      this.clothesData = this.crudClothesService.getClothes();
+      this.clothesFavoriteData = this.crudClothesService.getClothes({ favorite: true });
+      this.clothesCleanData = this.crudClothesService.getClothes({ clean: false });
     });
   }
 
   ngOnDestroy() {
-    if (!!this._subscribeUpdateDataClothes) {
-      this._subscribeUpdateDataClothes.unsubscribe();
-    }
+    this._subscribeUpdateDataClothes?.unsubscribe();
   }
 }

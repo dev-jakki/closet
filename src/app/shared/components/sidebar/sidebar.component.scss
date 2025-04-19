@@ -1,6 +1,6 @@
 .sidebar {
   width: min-content;
-  height: 100vh;
+  height: clamp(100vh, 100%, 100%);
   background-color: var(--color-primary);
   color: var(--color-primary);
   position: relative;

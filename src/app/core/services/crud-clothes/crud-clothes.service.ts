@@ -19,15 +19,6 @@ export class CrudClothesService {
     party: new Subject<void>(),
   }
 
-  // public updateDataDress: Subject<void> = new Subject();
-  // public updateDataBlouse: Subject<void> = new Subject();
-  // public updateDataPants: Subject<void> = new Subject();
-  // public updateDataSkirt: Subject<void> = new Subject();
-  // public updateDataCasual: Subject<void> = new Subject();
-  // public updateDataFormal: Subject<void> = new Subject();
-  // public updateDataBeach: Subject<void> = new Subject();
-  // public updateDataParty: Subject<void> = new Subject();
-  
   constructor() {}
 
   public addClothe(clothe: Clothe) {
@@ -43,33 +34,23 @@ export class CrudClothesService {
 
     if (filter) {
       if (filter?.section) {
-        let clothesDataFilter: Clothe[] = [];
-
-        clothesDataFilter = clothesData.filter(
+        clothesData = clothesData.filter(
           (clothe: Clothe) => clothe.section === filter.section
         );
-
-        clothesData = clothesDataFilter;
       }
 
-      if (filter?.clean) {
-        let clothesDataFilter: Clothe[] = [];
-
-        clothesDataFilter = clothesData.filter(
+      if (filter?.clean !== undefined) {
+        clothesData = clothesData.filter(
           (clothe: Clothe) => clothe.clean === filter.clean
         );
-        
-        clothesData = clothesDataFilter;
+
+        console.log(clothesData)
       }
 
       if (filter?.favorite) {
-        let clothesDataFilter: Clothe[] = [];
-
-        clothesDataFilter = clothesData.filter(
+        clothesData = clothesData.filter(
           (clothe: Clothe) => clothe.favorite === filter.favorite
         );
-        
-        clothesData = clothesDataFilter;
       }
 
       return clothesData;

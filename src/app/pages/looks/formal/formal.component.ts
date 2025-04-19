@@ -38,8 +38,6 @@ export class FormalComponent {
   }
 
   ngOnDestroy() {
-    if (!!this._subscribeUpdateDataClothes) {
-      this._subscribeUpdateDataClothes.unsubscribe();
-    }
+    this._subscribeUpdateDataClothes?.unsubscribe();
   }
 }

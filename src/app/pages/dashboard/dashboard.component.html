@@ -4,10 +4,20 @@
     <app-new-clothe-button></app-new-clothe-button>
   </div>
 
-  <h5>Todos</h5>
+  <h5>Favoritos</h5>
 
-  <div *ngIf="clothesData.length > 0; else noClothes" class="container__section__cards">
-    @for (clothe of clothesData; track clothe.id) {
+  <div *ngIf="clothesFavoriteData.length > 0; else noClothes" class="container__section__cards">
+    @for (clothe of clothesFavoriteData; track clothe.id) {
+    <app-card [clotheData]="clothe"></app-card>
+    }
+  </div>
+
+  <hr />
+
+  <h5>Roupas sujas</h5>
+
+  <div *ngIf="clothesCleanData.length > 0; else noClothes" class="container__section__cards">
+    @for (clothe of clothesCleanData; track clothe.id) {
     <app-card [clotheData]="clothe"></app-card>
     }
   </div>

@@ -38,8 +38,6 @@ export class PraiaComponent {
   }
 
   ngOnDestroy() {
-    if (!!this._subscribeUpdateDataClothes) {
-      this._subscribeUpdateDataClothes.unsubscribe();
-    }
+    this._subscribeUpdateDataClothes?.unsubscribe();
   }
 }

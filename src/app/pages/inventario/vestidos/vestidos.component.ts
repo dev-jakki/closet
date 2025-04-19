@@ -33,8 +33,6 @@ export class VestidosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (!!this._subscribeUpdateDataClothes) {
-      this._subscribeUpdateDataClothes.unsubscribe();
-    }
+    this._subscribeUpdateDataClothes?.unsubscribe();
   }
 }
