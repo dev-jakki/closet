@@ -30,9 +30,9 @@
           </div>
 
           @for (itemFilho of item.filhos; track itemFilho.index) {
-          <div 
+          <div
             [ngClass]="{ 'sidebar__child--center': !sidebar.expanded }"
-            [routerLink]="item.link + '/' + itemFilho.link"
+            [routerLink]="itemFilho.targetUrl"
           >
             <img [src]="itemFilho.icon" />
             <span *ngIf="sidebar.expanded">{{ itemFilho.title }}</span>
@@ -45,7 +45,7 @@
         *ngIf="!item.filhos"
         class="sidebar__no-childs"
         (click)="openItemMenu(item)"
-        [routerLink]="item.link"
+        [routerLink]="item.targetUrl"
         [ngClass]="{ 'sidebar__child--center': !sidebar.expanded }"
       >
         <img [src]="item.icon" />

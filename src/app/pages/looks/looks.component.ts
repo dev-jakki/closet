@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-looks',
   standalone: false,
   templateUrl: './looks.component.html',
-  styleUrl: './looks.component.scss'
+  styleUrl: './looks.component.scss',
 })
-export class LooksComponent {
-
-}
+export class LooksComponent {}

@@ -16,7 +16,9 @@ export class SidebarComponent implements OnInit {
     expanded: false,
   }
   
-  constructor(private sidebarService: SidebarService) {}
+  constructor(
+    private sidebarService: SidebarService,
+  ) {}
   
   ngOnInit(): void {
     this.menus = this.sidebarService.menus;
@@ -24,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
   // Se os items de um item estiverem a mostra, ele é escondido, e vice-versa
   public openItemMenu(data: Menus) {
-    if (data.index && data.filhos) {
+      if (data.index && data.filhos) {
       let isOpen = false;
 
       this.sidebar.opened.map(itemIndex => {

@@ -1,1 +1,16 @@
-<p>vestidos works!</p>
+<section class="container__section">
+  <div class="d-flex justify-content-between">
+    <h3>Vestidos</h3>
+    <app-new-clothe-button></app-new-clothe-button>
+  </div>
+
+  <div *ngIf="clothesData; else noClothes" class="container__section__cards">
+    @for (clothe of clothesData; track clothe.id) {
+    <app-card [clotheData]="clothe"></app-card>
+    }
+  </div>
+
+  <ng-template #noClothes>
+    <p>Não há vestimentas nesta seção!</p>
+  </ng-template>
+</section>

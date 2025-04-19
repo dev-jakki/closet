@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DrawerService } from '../../../core/services/drawer/drawer.service';
 import { RegisterClotheComponent } from '../../forms/register-clothe/register-clothe.component';
 import { DrawerContent } from '../../interfaces/drawer-content';
@@ -14,10 +14,11 @@ import { DrawerOpenParams } from '../../interfaces/drawer-open-params';
   styleUrl: './new-clothe-button.component.scss',
 })
 export class NewClotheButtonComponent {
+  @Input() public text = 'Novo';
 
   constructor(
     private drawerService: DrawerService,
-    public newClotheButtonService: NewClotheButtonService,
+    public newClotheButtonService: NewClotheButtonService
   ) {}
 
   public onAddClothe() {
@@ -29,20 +30,19 @@ export class NewClotheButtonComponent {
     const options: DrawerOptions = {
       positionX: PosicaoX.Right,
       positionY: PosicaoY.Top,
-      height: "100%",
-      size: "auto",
+      height: '100%',
+      size: 'auto',
       isDraggable: true,
     };
 
     const modalParams: DrawerOpenParams = {
-      title: "Adicionar vestimenta",
+      title: 'Adicionar vestimenta',
       drawerContent,
       options,
     };
 
     const modalRef = this.drawerService.open(modalParams);
 
-    modalRef.result.finally(() => {
-    });
+    modalRef.result.finally(() => {});
   }
 }

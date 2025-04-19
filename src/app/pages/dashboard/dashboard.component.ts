@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private observeUpdateDataClothes() {
-    this._subscribeUpdateDataClothes = this.crudClothesService.updateDataClothes.subscribe(() => {
+    this._subscribeUpdateDataClothes = this.crudClothesService.updateData.dashboard.subscribe(() => {
       this.clothesData = this.crudClothesService.getClothes();
     });
   }

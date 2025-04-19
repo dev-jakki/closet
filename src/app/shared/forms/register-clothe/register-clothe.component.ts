@@ -22,7 +22,6 @@ export class RegisterClotheComponent implements OnInit {
 
   public registerClotheForm: FormGroup = <FormGroup>{};
   public menus: Menus[] = [];
-  public menusOptions: Menus[] = [];
   public clotheOptions = [
     { text: 'Sim', value: 1 },
     { text: 'Não', value: 0 },
@@ -36,7 +35,6 @@ export class RegisterClotheComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.menusOptions = this.getMenusFreeChilds(this.sidebarService.menus);
     this.inicializeForm();
   }
 
@@ -89,26 +87,11 @@ export class RegisterClotheComponent implements OnInit {
     return convertedValue;
   }
 
-  private getMenusFreeChilds(menus: Menus[]): Menus[] {
-    const menusFreeChilds: Menus[] = [];
-
-    menus.forEach((menu) => {
-      if (menu.filhos === null || menu.filhos.length === 0) {
-        menusFreeChilds.push(menu);
-      } else {
-        const filhosSemFilhos = this.getMenusFreeChilds(menu.filhos);
-        menusFreeChilds.push(...filhosSemFilhos);
-      }
-    });
-
-    return menusFreeChilds;
-  }
-
   public canCloseDrawer() {
     return !this.registerClotheForm.dirty;
   }
 
-  private closeModal() {
+  private closeDrawer() {
     this.modal.close();
   }
 
@@ -127,7 +110,7 @@ export class RegisterClotheComponent implements OnInit {
     };
 
     this.crudClothesService.addClothe(newClothe);
-    this.closeModal();
-    this.crudClothesService.updateDataClothes.next();
+    this.closeDrawer();
+    this.crudClothesService.searchPageToUpdate(this.sidebarService.currentMenuIndex);
   }
 }

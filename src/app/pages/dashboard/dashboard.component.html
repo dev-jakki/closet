@@ -1,11 +1,15 @@
-<section class="dashboard">
+<section class="container__section">
   <h3>Dashboard</h3>
 
   <h5>Todos</h5>
 
-  <div class="dashboard__cards-favoritos">
+  <div *ngIf="clothesData; else noClothes" class="container__section__cards">
     @for (clothe of clothesData; track clothe.id) {
-      <app-card [clotheData]="clothe"></app-card>
+    <app-card [clotheData]="clothe"></app-card>
     }
   </div>
+
+  <ng-template #noClothes>
+    <p>Não há vestimentas nesta seção!</p>
+  </ng-template>
 </section>

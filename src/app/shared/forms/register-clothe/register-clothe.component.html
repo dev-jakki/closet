@@ -21,18 +21,6 @@
       </div>
     </div>
 
-    <div class="col-12 mt-2">
-      <label>Qual seção? <em>*</em></label>
-
-      <select placeholder="Escolha" formControlName="section" class="w-100">
-        @for (option of menusOptions; track option) {
-        <option [value]="option.index">
-          {{ option.title }}
-        </option>
-        }
-      </select>
-    </div>
-
     <div class="col-12">
       <label>Roupa limpa? <em>*</em></label>
 

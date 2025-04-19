@@ -2,6 +2,6 @@ export interface Menus {
   index: number;
   title: string;
   icon: string;
-  link: string;
+  targetUrl: string;
   filhos: Menus[] | null;
 }

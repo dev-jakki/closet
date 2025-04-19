@@ -1,31 +1,36 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { LooksComponent } from "./looks.component";
-import { CasualComponent } from "./casual/casual.component";
-import { FormalComponent } from "./formal/formal.component";
-import { PraiaComponent } from "./praia/praia.component";
-import { FestaComponent } from "./festa/festa.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LooksComponent } from './looks.component';
+import { CasualComponent } from './casual/casual.component';
+import { FormalComponent } from './formal/formal.component';
+import { PraiaComponent } from './praia/praia.component';
+import { FestaComponent } from './festa/festa.component';
+import { AuthGuard } from '../../shared/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: LooksComponent,
     children: [
       {
-        path: "casual",
-        component: CasualComponent
+        path: 'casual',
+        canActivate: [AuthGuard],
+        component: CasualComponent,
       },
       {
-        path: "formal",
-        component: FormalComponent
+        path: 'formal',
+        canActivate: [AuthGuard],
+        component: FormalComponent,
       },
       {
-        path: "praia",
-        component: PraiaComponent
+        path: 'praia',
+        canActivate: [AuthGuard],
+        component: PraiaComponent,
       },
       {
-        path: "festa",
-        component: FestaComponent
+        path: 'festa',
+        canActivate: [AuthGuard],
+        component: FestaComponent,
       },
     ],
   },

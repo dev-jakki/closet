@@ -1,1 +1,13 @@
-<p>calcas works!</p>
+<section class="container__section">
+  <h3>Calças</h3>
+
+  <div *ngIf="clothesData; else noClothes" class="container__section__cards">
+    @for (clothe of clothesData; track clothe.id) {
+    <app-card [clotheData]="clothe"></app-card>
+    }
+  </div>
+
+  <ng-template #noClothes>
+    <p>Não há vestimentas nesta seção!</p>
+  </ng-template>
+</section>
