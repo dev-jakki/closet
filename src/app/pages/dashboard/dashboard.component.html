@@ -3,13 +3,13 @@
 
   <h5>Todos</h5>
 
-  <div *ngIf="clothesData; else noClothes" class="container__section__cards">
+  <div *ngIf="clothesData.length > 0; else noClothes" class="container__section__cards">
     @for (clothe of clothesData; track clothe.id) {
     <app-card [clotheData]="clothe"></app-card>
     }
   </div>
 
   <ng-template #noClothes>
-    <p>Não há vestimentas nesta seção!</p>
+    <p class="not-clothes">Não há vestimentas nesta seção!</p>
   </ng-template>
 </section>

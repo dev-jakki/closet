@@ -8,7 +8,6 @@ import { BlusasComponent } from './blusas/blusas.component';
 import { CalcasComponent } from './calcas/calcas.component';
 import { SaiasComponent } from './saias/saias.component';
 import { SharedModule } from '../../shared/shared.module';
-import { NewClotheButtonComponent } from '../../shared/atoms/new-clothe-button/new-clothe-button.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { NewClotheButtonComponent } from '../../shared/atoms/new-clothe-button/n
     BlusasComponent,
     CalcasComponent,
     SaiasComponent,
-    NewClotheButtonComponent
   ],
   imports: [CommonModule, SharedModule, InventarioRoutingModule],
 })

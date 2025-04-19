@@ -92,20 +92,20 @@ export class SidebarService {
 
   constructor(private router: Router) {}
 
-  public hasAcesso = (menus: Menus[] = this.menus) => {
-    const targetUrlCurrent = this.getUrlCurrent();
-
+  public hasAcesso = (menus: Menus[] = this.menus, currentUrl?: string): boolean => {
+    const url = currentUrl || this.getUrlCurrent();
+  
     for (const menu of menus) {
-      if (menu.targetUrl === targetUrlCurrent) {
+      if (menu.targetUrl === url) {
         this.currentMenuIndex = menu.index;
         return true;
       }
-
-      if (menu.filhos && this.hasAcesso(menu.filhos)) {
+  
+      if (menu.filhos && this.hasAcesso(menu.filhos, url)) {
         return true;
       }
     }
-
+  
     return false;
   };
 

@@ -13,7 +13,7 @@ import { SidebarService } from '../../../core/services/sidebar/sidebar.service';
 export class FormalComponent {
   public clothesData: Clothe[] = [];
   private _subscribeUpdateDataClothes: Subscription = <Subscription>{};
-  private indexMenuCurrent: number = 0;
+  public indexMenuCurrent: number = 0;
 
   constructor(
     public crudClothesService: CrudClothesService,

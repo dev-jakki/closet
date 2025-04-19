@@ -1,5 +1,5 @@
 import { SidebarService } from './../../../core/services/sidebar/sidebar.service';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Clothe } from '../../../shared/interfaces/clothe';
 import { CrudClothesService } from '../../../core/services/crud-clothes/crud-clothes.service';
@@ -10,10 +10,10 @@ import { CrudClothesService } from '../../../core/services/crud-clothes/crud-clo
   templateUrl: './vestidos.component.html',
   styleUrl: './vestidos.component.scss'
 })
-export class VestidosComponent {
+export class VestidosComponent implements OnInit, OnDestroy {
   public clothesData: Clothe[] = [];
   private _subscribeUpdateDataClothes: Subscription = <Subscription>{};
-  private indexMenuCurrent: number = 0;
+  public indexMenuCurrent: number = 0;
 
   constructor(
     public crudClothesService: CrudClothesService,

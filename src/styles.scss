@@ -20,8 +20,8 @@ body {
   --color-primary-700: #FFEDF9;
   --white: #ffffff;
   --black: #141414;
-  --shadow: #00000033;
-  --gray: #0000000d;
+  --gray: #8b8b8b;
+  --shadow: #0000000d;
   --red: #ff0000;
 }
 
@@ -54,10 +54,32 @@ select {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   
   &__cards {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
   }
+}
+
+[readOnly="true"] {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: .5;
+}
+
+.not-clothes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  color: var(--color-primary-300);
 }

@@ -1,5 +1,5 @@
 import { CrudClothesService } from './../../../core/services/crud-clothes/crud-clothes.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Menus } from '../../interfaces/menus';
 import { SidebarService } from '../../../core/services/sidebar/sidebar.service';
@@ -16,12 +16,14 @@ const MAX_MB_SIZE = 2.5;
 })
 export class RegisterClotheComponent implements OnInit {
   @ViewChild('file') public inputFileComponent!: ElementRef<HTMLInputElement>;
+  @Input() public indexSection = 0;
   private imageBase64: string | undefined;
   public imageSelected: string | undefined =
     'https://st.depositphotos.com/3538103/5151/i/450/depositphotos_51514387-stock-photo-photograph-icon.jpg';
 
   public registerClotheForm: FormGroup = <FormGroup>{};
   public menus: Menus[] = [];
+  public menusOptions: Menus[] = [];
   public clotheOptions = [
     { text: 'Sim', value: 1 },
     { text: 'Não', value: 0 },
@@ -35,6 +37,7 @@ export class RegisterClotheComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.menusOptions = this.getMenusFreeChilds(this.sidebarService.menus);
     this.inicializeForm();
   }
 
@@ -42,7 +45,7 @@ export class RegisterClotheComponent implements OnInit {
     this.registerClotheForm = this.fb.group({
       image: [null, [Validators.required]],
       clean: [null, [Validators.required]],
-      section: [null, [Validators.required]],
+      section: [this.indexSection, [Validators.required]],
     });
   }
 
@@ -89,6 +92,21 @@ export class RegisterClotheComponent implements OnInit {
 
   public canCloseDrawer() {
     return !this.registerClotheForm.dirty;
+  }
+
+  private getMenusFreeChilds(menus: Menus[]): Menus[] {
+    const menusFreeChilds: Menus[] = [];
+
+    menus.forEach((menu) => {
+      if (menu.filhos === null || menu.filhos.length === 0) {
+        menusFreeChilds.push(menu);
+      } else {
+        const filhosSemFilhos = this.getMenusFreeChilds(menu.filhos);
+        menusFreeChilds.push(...filhosSemFilhos);
+      }
+    });
+
+    return menusFreeChilds;
   }
 
   private closeDrawer() {

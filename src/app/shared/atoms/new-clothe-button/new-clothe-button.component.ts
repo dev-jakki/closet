@@ -1,3 +1,4 @@
+import { SidebarService } from './../../../core/services/sidebar/sidebar.service';
 import { Component, Input } from '@angular/core';
 import { DrawerService } from '../../../core/services/drawer/drawer.service';
 import { RegisterClotheComponent } from '../../forms/register-clothe/register-clothe.component';
@@ -18,13 +19,16 @@ export class NewClotheButtonComponent {
 
   constructor(
     private drawerService: DrawerService,
-    public newClotheButtonService: NewClotheButtonService
+    public newClotheButtonService: NewClotheButtonService,
+    private sidebarService: SidebarService
   ) {}
 
   public onAddClothe() {
     const drawerContent: DrawerContent = {
       component: RegisterClotheComponent,
-      inputs: {},
+      inputs: {
+        indexSection: this.sidebarService.currentMenuIndex,
+      },
     };
 
     const options: DrawerOptions = {

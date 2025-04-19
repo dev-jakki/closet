@@ -14,11 +14,11 @@ $image-size: 250px;
     height: $image-size;
     left: 50%;
     border-radius: 8px;
-    border: 3px solid var(--gray);
+    border: 3px solid var(--shadow);
     transform: translateX(-50%);
     pointer-events: auto;
     overflow: hidden;
-    background-color: var(--gray);
+    background-color: var(--shadow);
   }
 }
 
@@ -39,7 +39,7 @@ $image-size: 250px;
     bottom: -15px;
     padding: 5px;
     color: var(--black);
-    background-color: var(--gray);
+    background-color: var(--shadow);
     width: $image-size;
   }
 

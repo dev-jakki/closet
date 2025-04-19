@@ -5,39 +5,34 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { SidebarService } from '../../core/services/sidebar/sidebar.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate, OnDestroy {
-  public _subscriptionMenus: Subscription = Subscription.EMPTY;
+  public _subscriptionMenus: Subscription | null = null;
 
   constructor(
     private sidebarService: SidebarService,
     private router: Router
   ) {}
 
-  canActivate(
+  async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    if (route.url.length >= 0) {
-      if (this.sidebarService.menus.length) {
-        this.verifyHasAccessUser();
-      }
+  ): Promise<boolean> {
+    const currentUrl = state.url.split('?')[0];
+    
+    if (this.sidebarService.menus.length) {
+      const hasAccess = this.sidebarService.hasAcesso(undefined, currentUrl);
 
-      return true;
+      if (!hasAccess) {
+        this.redirectToNotFound();
+        return false;
+      }
     }
 
-    return false;
-  }
-
-  private verifyHasAccessUser() {
-    setTimeout(() => {
-      if (!this.sidebarService.hasAcesso()) {
-        this.redirectToNotFound();
-      }
-    });
+    return true;
   }
 
   private redirectToNotFound() {
@@ -45,8 +40,6 @@ export class AuthGuard implements CanActivate, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    if (this._subscriptionMenus) {
-      this._subscriptionMenus.unsubscribe();
-    }
+    this._subscriptionMenus?.unsubscribe();
   }
 }
