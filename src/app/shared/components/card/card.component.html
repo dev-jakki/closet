@@ -4,7 +4,7 @@
     [src]="clotheData.clean ? '/assets/icons/limpo.svg' : '/assets/icons/bolhas.svg'"
   />
 
-  <img [src]="clotheData.image" />
+  <img class="image" [src]="clotheData.image" />
 
   <div class="card__footer">
     <img (click)="removeClothe()" src="/assets/icons/lixeira.svg" />
