@@ -4,6 +4,8 @@
   (mouseenter)="onMouseEnter()"
   (mouseleave)="onMouseLeave()"
 >
+  <div [class.overlay]="sidebar.expanded"></div>
+
   <div class="sidebar__content">
     <div class="sidebar__logo">
       <img
@@ -14,7 +16,11 @@
       <h4>Closet</h4>
     </div>
 
-    <div class="sidebar__items d-flex flex-column">
+    <div class="sidebar__menu" (click)="toggleSidebar()">
+      <i class="fa-solid fa-bars-staggered"></i>
+    </div>
+
+    <div class="sidebar__items d-flex flex-column" [class.open]="sidebar.expanded">
       @for (item of menus; track item.index) {
       <div *ngIf="item.filhos">
         <div

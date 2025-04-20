@@ -43,8 +43,6 @@ export class CrudClothesService {
         clothesData = clothesData.filter(
           (clothe: Clothe) => clothe.clean === filter.clean
         );
-
-        console.log(clothesData)
       }
 
       if (filter?.favorite) {

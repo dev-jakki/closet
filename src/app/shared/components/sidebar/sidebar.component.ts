@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Menus } from '../../interfaces/menus';
 import { Sidebar } from '../../interfaces/sidebar';
 import { SidebarService } from '../../../core/services/sidebar/sidebar.service';
@@ -15,6 +15,8 @@ export class SidebarComponent implements OnInit {
     opened: [],
     expanded: false,
   }
+
+  private screenWidth: number = 0;
   
   constructor(
     private sidebarService: SidebarService,
@@ -22,6 +24,7 @@ export class SidebarComponent implements OnInit {
   
   ngOnInit(): void {
     this.menus = this.sidebarService.menus;
+    this.screenWidth = window.innerWidth;
   }
 
   // Se os items de um item estiverem a mostra, ele é escondido, e vice-versa
@@ -74,10 +77,21 @@ export class SidebarComponent implements OnInit {
   }
   
   onMouseEnter() {
+    if (this.screenWidth <= 576) return;
     this.sidebar.expanded = true;
   }
 
   onMouseLeave() {
+    if (this.screenWidth <= 576) return;
     this.sidebar.expanded = false;
+  }
+
+  toggleSidebar() {
+    this.sidebar.expanded = !this.sidebar.expanded;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.screenWidth = window.innerWidth;
   }
 }
