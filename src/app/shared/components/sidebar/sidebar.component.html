@@ -6,9 +6,10 @@
 >
   <div class="sidebar__content">
     <div class="sidebar__logo">
-      <img 
+      <img
         [ngClass]="{ 'sidebar__logo-width--70': !sidebar.expanded }"
-        src="/assets/images/logo.png" alt="Logo" 
+        src="/assets/images/logo.png"
+        alt="Logo"
       />
       <h4>Closet</h4>
     </div>
@@ -26,7 +27,15 @@
             (click)="openItemMenu(item)"
           >
             <span>{{ item.title }}</span>
-            <span *ngIf="sidebar.expanded">&lt;</span>
+            <span
+              class="sidebar__childs__title--icon"
+              *ngIf="sidebar.expanded"
+              [innerHTML]="
+                isOpenFather(item.index)
+                  ? '<i class=\'fa-solid fa-chevron-down\'></i>'
+                  : '<i class=\'fa-solid fa-chevron-left\'></i>'
+              "
+            ></span>
           </div>
 
           @for (itemFilho of item.filhos; track itemFilho.index) {

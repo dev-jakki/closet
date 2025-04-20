@@ -1,0 +1,8 @@
+<div class="notifications">
+  <div *ngIf="notifications.length > 0" class="notificacoes-lista">
+    <div *ngFor="let notification of notifications" class="notificacao-item">
+      <p>{{ notification.message }}</p>
+      <button (click)="removeNotification(notification.id)">Remover</button>
+    </div>
+  </div>
+</div>

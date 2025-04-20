@@ -60,6 +60,18 @@ export class SidebarComponent implements OnInit {
 
     return;
   }
+
+  public isOpenedMenu(index: number) {
+    for (let i = 0; i < this.sidebar.opened.length; i++) {
+      const itemIndex = this.sidebar.opened[i];
+      
+      if (itemIndex === index) {
+        return true;
+      }
+    }
+
+    return false;
+  }
   
   onMouseEnter() {
     this.sidebar.expanded = true;
