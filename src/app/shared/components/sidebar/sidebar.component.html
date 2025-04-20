@@ -4,7 +4,7 @@
   (mouseenter)="onMouseEnter()"
   (mouseleave)="onMouseLeave()"
 >
-  <div [class.overlay]="sidebar.expanded"></div>
+  <div [class.overlay]="sidebar.expanded" (click)="toggleSidebar()"></div>
 
   <div class="sidebar__content">
     <div class="sidebar__logo">
