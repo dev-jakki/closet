@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Menus } from '../../interfaces/menus';
 import { Sidebar } from '../../interfaces/sidebar';
 import { SidebarService } from '../../../core/services/sidebar/sidebar.service';
+import { ThemeService } from '../../../core/services/theme/theme.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,12 +15,14 @@ export class SidebarComponent implements OnInit {
   public sidebar: Sidebar = {
     opened: [],
     expanded: false,
+    color: '#ec60a3',
   }
 
-  private screenWidth: number = 0;
+  private screenWidth = 0;
   
   constructor(
     private sidebarService: SidebarService,
+    private themeService: ThemeService,
   ) {}
   
   ngOnInit(): void {
@@ -93,5 +96,9 @@ export class SidebarComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.screenWidth = window.innerWidth;
+  }
+
+  changeColor() {
+    this.themeService.generateColors(this.sidebar.color);
   }
 }

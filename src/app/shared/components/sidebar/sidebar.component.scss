@@ -7,6 +7,20 @@
   flex-direction: column;
 }
 
+.sidebar__content {
+  padding: 8px 0;
+}
+
+.sidebar__color {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  border: 1px solid var(--white);
+  cursor: pointer;
+}
+
 .sidebar__logo {
   text-align: center;
   color: var(--white);

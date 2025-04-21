@@ -16,11 +16,14 @@
       <h4>Closet</h4>
     </div>
 
-    <div class="sidebar__menu" (click)="toggleSidebar()">
+    <div class="sidebar__menu d-sm-none" (click)="toggleSidebar()">
       <i class="fa-solid fa-bars-staggered"></i>
     </div>
 
-    <div class="sidebar__items d-flex flex-column" [class.open]="sidebar.expanded">
+    <div
+      class="sidebar__items d-flex flex-column"
+      [class.open]="sidebar.expanded"
+    >
       @for (item of menus; track item.index) {
       <div *ngIf="item.filhos">
         <div
@@ -67,6 +70,13 @@
         <span *ngIf="sidebar.expanded">{{ item.title }}</span>
       </div>
       }
+
+      <input
+        type="color"
+        class="sidebar__color"
+        [(ngModel)]="sidebar.color"
+        (change)="changeColor()"
+      />
     </div>
   </div>
 </section>
