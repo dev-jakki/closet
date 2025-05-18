@@ -1,16 +1,14 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { SidebarService } from '../../core/services/sidebar/sidebar.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate, OnDestroy {
-  public _subscriptionMenus: Subscription | null = null;
+export class AuthGuard implements CanActivate {
 
   constructor(
     private sidebarService: SidebarService,
@@ -37,9 +35,5 @@ export class AuthGuard implements CanActivate, OnDestroy {
 
   private redirectToNotFound() {
     this.router.navigate(['/nao-autorizado']);
-  }
-
-  public ngOnDestroy(): void {
-    this._subscriptionMenus?.unsubscribe();
   }
 }
